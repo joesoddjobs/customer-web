@@ -1,0 +1,19 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "customer-web-prod-20190709174555-authRole",
+            "UnauthRoleArn": "arn:aws:iam::871118163832:role/customer-web-prod-20190709174555-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::871118163832:role/customer-web-prod-20190709174555-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "customer-web-prod-20190709174555-deployment",
+            "UnauthRoleName": "customer-web-prod-20190709174555-unauthRole",
+            "StackName": "customer-web-prod-20190709174555",
+            "StackId": "arn:aws:cloudformation:us-east-1:871118163832:stack/customer-web-prod-20190709174555/ee0041f0-a292-11e9-be33-0aad5d963972"
+        },
+        "categories": {
+            "auth": {
+                "customerwebca288bac": {}
+            }
+        }
+    }
+}

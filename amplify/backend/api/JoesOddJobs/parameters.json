@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "JoesOddJobs",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcustomerwebca288bac",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
