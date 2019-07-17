@@ -1,5 +1,129 @@
-type Todo @model {
+enum JobType {
+  LANDSCAPING
+  LAWN_MOWING
+  MOVING
+  FURNITURE_ASSEMBLY
+  POWER_WASHING
+  PAINTING
+  CLEANING
+  OTHER
+}
+
+enum MethodOfContact {
+  PHONE
+  EMAIL
+}
+
+enum Status {
+  CLAIMED
+  OPEN
+  COMPLETED
+  PAID
+}
+
+type Address {
+  addressLine1: String!
+  addressLine2: String
+  city: String!
+  state: String
+  postalCode: String
+  countryCode: String
+}
+
+type Contractor @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  jobs: [ContractorJob] @connection(name: "ContractorJobs")
+  phoneNumber: String!
+  address: Address
+  Franchise: Franchise!
+    @connection(name: "FranchiseContractors", sortField: "createdAt")
+  photo: S3Object
+  income: Income
+  birthDate: String!
+  rating: Float
+  reviews: [ContractorWorkReview] @connection(name: "ContractorWorkReviews")
+  createdAt: AWSDateTime!
+}
+
+type ContractorJob @model(queries: null) {
+  id: ID!
+  contractor: Contractor! @connection(name: "ContractorJobs")
+  job: Job! @connection(name: "JobContractors")
+}
+
+type ContractorWorkReview @model(queries: null) {
+  id: ID!
+  contractor: Contractor! @connection(name: "ContractorWorkReviews")
+  workReview: WorkReview! @connection(name: "WorkReviewContractors")
+}
+
+type Customer @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  jobs: [Job] @connection(name: "CustomerJobs")
+  favoriteContractors: [Contractor] @connection
+  phoneNumber: String!
+}
+
+type WorkReview @model {
+  id: ID!
+  customer: Customer @connection
+  contractors: [ContractorWorkReview] @connection(name: "WorkReviewContractors")
+  review: String
+  rating: Float!
+  job: Job!
+  createdAt: AWSDateTime!
+}
+
+type Franchise @model {
   id: ID!
   name: String!
-  description: String
+  address: Address!
+  contractors: [Contractor]
+    @connection(name: "FranchiseContractors", sortField: "createdAt")
+  jobs: [Job] @connection(name: "FranchiseJobs")
+  franchisee: Franchisee @connection(name: "FranchiseeFranchise")
+  rating: Float
+}
+
+type Franchisee @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  franchise: Franchise @connection(name: "FranchiseeFranchise")
+}
+
+type Income {
+  yearToDate: Float!
+  total: Float!
+}
+
+type Job @model {
+  id: ID!
+  customer: Customer @connection(name: "CustomerJobs", sortField: "createdAt")
+  status: Status!
+  contractors: [ContractorJob] @connection(name: "JobContractors")
+  address: Address!
+  jobType: JobType!
+  numberOfWorkers: Int!
+  estimatedTime: Int!
+  actualTime: Float
+  jobDescription: String!
+  firstChoiceDate: String!
+  secondChoiceDate: String!
+  preferredMethodOfContact: MethodOfContact!
+  rate: Float!
+  franchise: Franchise @connection(name: "FranchiseJobs")
+}
+
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
 }
