@@ -1,42 +1,26 @@
 import React from 'react'
 import Amplify from 'aws-amplify'
-import {
-  ConfirmSignIn,
-  ConfirmSignUp,
-  ForgotPassword,
-  RequireNewPassword,
-  SignUp,
-  VerifyContact,
-  withAuthenticator
-} from 'aws-amplify-react'
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import Authenticator from './authenticator'
 // eslint-disable-next-line camelcase
 import aws_exports from './aws-exports'
+import { Dashboard, Home } from './containers'
 
 Amplify.configure(aws_exports)
 
-const MySignIn = () => {
+const App = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        width: '100%',
-        height: '100vh',
-        backgroundColor: 'red'
-      }}
-    />
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Authenticator>
+            <Route path="/dashboard" component={Dashboard} />
+          </Authenticator>
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
-function App() {
-  return <div className="App">APP</div>
-}
-
-export default withAuthenticator(App, false, [
-  <MySignIn />,
-  <ConfirmSignIn />,
-  <VerifyContact />,
-  <SignUp />,
-  <ConfirmSignUp />,
-  <ForgotPassword />,
-  <RequireNewPassword />
-])
+export default App
