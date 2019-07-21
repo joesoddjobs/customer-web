@@ -8,7 +8,7 @@ import {
   Image
 } from './styles'
 
-const Intro = () => {
+const IntroBlock = () => {
   return (
     <Container>
       <InfoContainer>
@@ -24,4 +24,4 @@ const Intro = () => {
   )
 }
 
-export default Intro
+export default IntroBlock
