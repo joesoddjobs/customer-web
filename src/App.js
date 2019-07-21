@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import Authenticator from './authenticator'
 // eslint-disable-next-line camelcase
 import aws_exports from './aws-exports'
-import NavBar from './components/NavBar'
+import { Footer, NavBar } from './components'
 import { Dashboard, Home } from './containers'
 import theme from './theme'
 
@@ -23,6 +23,7 @@ const App = () => {
               <Route path="/dashboard" component={Dashboard} />
             </Authenticator>
           </Switch>
+          <Footer />
         </div>
       </ThemeProvider>
     </Router>
