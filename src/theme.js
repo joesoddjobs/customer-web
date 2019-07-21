@@ -10,6 +10,10 @@ const theme = {
   colors: {
     font: {
       primary: 'black'
+    },
+    background: {
+      primary: 'white',
+      secondary: '#F2F2F2'
     }
   },
   fonts: {
