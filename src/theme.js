@@ -15,7 +15,8 @@ const theme = {
     background: {
       primary: 'white',
       secondary: '#F2F2F2',
-      tertiary: '#1B1464'
+      tertiary: '#1B1464',
+      quaternary: '#333333'
     },
     button: {
       primary: 'white',
