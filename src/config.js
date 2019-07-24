@@ -1,7 +1,7 @@
 export default {
   socialMediaLinks: {
-    facebook: 'www.facebook.com',
-    instagram: 'www.instagram.com',
-    linkedin: 'www.linkedin.com'
+    facebook: 'https://www.facebook.com',
+    instagram: 'https://www.instagram.com',
+    linkedin: 'https://www.linkedin.com'
   }
 }
