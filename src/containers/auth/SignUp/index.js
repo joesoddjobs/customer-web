@@ -1,11 +1,19 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-underscore-dangle */
 import React from 'react'
+import { SignUp as AWSSignUp } from 'aws-amplify-react'
 import { Form, Input, Checkbox, Button } from 'antd'
 import { Wrapper, BodyWrapper, Header } from './styles'
 
-class SignUp extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: []
+class SignUp extends AWSSignUp {
+  constructor(props) {
+    super(props)
+    this._validAuthStates = ['signUp']
+    this.state = {
+      confirmDirty: false,
+      autoCompleteResult: []
+    }
   }
 
   handleSubmit = e => {
@@ -19,7 +27,7 @@ class SignUp extends React.Component {
 
   handleConfirmBlur = e => {
     const { value } = e.target
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value })
+    this.setState(prev => ({ confirmDirty: prev.confirmDirty || !!value }))
   }
 
   compareToFirstPassword = (rule, value, callback) => {
@@ -39,7 +47,7 @@ class SignUp extends React.Component {
     callback()
   }
 
-  render() {
+  showComponent() {
     const { getFieldDecorator } = this.props.form
 
     const formItemLayout = {
