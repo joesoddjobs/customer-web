@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react'
 import { Form, Input, Divider, Button } from 'antd'
+import { SignIn as AWSSignIn } from 'aws-amplify-react'
 import {
   Wrapper,
   BodyWrapper,
@@ -9,16 +11,21 @@ import {
   ButtonContainer
 } from './styles'
 
-class SignIn extends React.Component {
-  state = {
-    confirmDirty: false,
-    autoCompleteResult: []
+class SignIn extends AWSSignIn {
+  constructor(props) {
+    super(props)
+    this._validAuthStates = ['signIn', 'signedOut', 'signedUp']
+    this.state = {
+      confirmDirty: false,
+      autoCompleteResult: []
+    }
   }
 
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        // eslint-disable-next-line no-console
         console.log('Received values of form: ', values)
       }
     })
@@ -26,7 +33,7 @@ class SignIn extends React.Component {
 
   handleConfirmBlur = e => {
     const { value } = e.target
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value })
+    this.setState(prev => ({ confirmDirty: prev.confirmDirty || !!value }))
   }
 
   compareToFirstPassword = (rule, value, callback) => {
@@ -46,7 +53,7 @@ class SignIn extends React.Component {
     callback()
   }
 
-  render() {
+  showComponent() {
     const { getFieldDecorator } = this.props.form
 
     const formItemLayout = {
@@ -114,7 +121,7 @@ class SignIn extends React.Component {
             <DividerContainer>
               <Divider />
             </DividerContainer>
-            <SignUpText>New to Joe's Odd Jobs?</SignUpText>
+            <SignUpText>New to Joe&apos;s Odd Jobs?</SignUpText>
             <Form.Item {...tailFormItemLayout}>
               <ButtonContainer>
                 <Button type="primary" htmlType="submit">
