@@ -117,6 +117,8 @@ type Job @model {
   jobDescription: String!
   firstChoiceDate: String!
   secondChoiceDate: String!
+  scheduledTime: String
+  scheduledDate: String
   preferredMethodOfContact: MethodOfContact!
   rate: Float!
   franchise: Franchise @connection(name: "FranchiseJobs")
