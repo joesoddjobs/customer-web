@@ -8,6 +8,7 @@ import aws_exports from './aws-exports'
 import { Footer, NavBar } from './components'
 import { Dashboard, Home } from './containers'
 import theme from './theme'
+import './App.less'
 
 Amplify.configure(aws_exports)
 
